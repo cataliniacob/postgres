@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 our $config = {
-	asserts => 0,    # --enable-cassert
+	asserts => 1,    # --enable-cassert
 	     # float4byval=>1,         # --disable-float4-byval, on by default
 
 	# float8byval=> $platformbits == 64, # --disable-float8-byval,
@@ -17,7 +17,7 @@ our $config = {
 	gss       => undef,    # --with-gssapi=<path>
 	icu       => undef,    # --with-icu=<path>
 	nls       => undef,    # --enable-nls=<path>
-	tap_tests => undef,    # --enable-tap-tests
+	tap_tests => 1,        # --enable-tap-tests
 	tcl       => undef,    # --with-tcl=<path>
 	perl      => undef,    # --with-perl
 	python    => undef,    # --with-python=<path>
