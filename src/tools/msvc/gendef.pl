@@ -161,6 +161,23 @@ my $defname  = uc $1;
 my $deffile  = "$ARGV[0]/$defname.def";
 my $platform = $ARGV[1];
 
+# print "-M for $deffile " . (-M $deffile) . "\n";
+
+# my $i = 1;
+
+# while (<$ARGV[0]/*.obj>)
+# {
+# 	my $objfile = $_;
+
+# 	print "-M for $objfile: " . (-M $objfile) . "\n";
+# }
+
+# fixing the exit logic helps quite a lot, especially for things like postgres
+
+# with a noop gendef.pl we have about 15s for a noop build (without changing guids)
+# commenting out invoking gendef.pl altogether (if we would teach msbuild about dep tracking)
+# takes a noop parallel build to 5s (it really does nothing so probably best we can do)
+
 # if the def file exists and is newer than all input object files, skip
 # its creation
 if (-f $deffile
