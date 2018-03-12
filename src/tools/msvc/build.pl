@@ -53,6 +53,8 @@ elsif (uc($ARGV[0]) ne "RELEASE")
 
 # ... and do it
 
+# must copy WindowsSDKVersion into DefaultWindowsSDKVersion env variable
+
 if ($buildwhat and $vcver >= 10.00)
 {
 	system(
