@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use 5.8.0;
 use File::Spec::Functions qw(splitpath catpath);
-use List::Util qw(max);
+use List::Util qw(min);
 
 my @def;
 
@@ -164,9 +164,9 @@ my $platform = $ARGV[1];
 # if the def file exists and is newer than all input object files, skip
 # its creation
 if (-f $deffile
-	&& (-M $deffile > max(map { -M } <$ARGV[0]/*.obj>)))
+	&& (-M $deffile < min(map { -M } <$ARGV[0]/*.obj>)))
 {
-	print "Not re-generating $defname.DEF, file already exists.\n";
+	print "Not re-generating $defname.DEF, file already exists and is up to date.\n";
 	exit(0);
 }
 
