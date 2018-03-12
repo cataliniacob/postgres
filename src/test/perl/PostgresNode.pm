@@ -156,6 +156,7 @@ sub new
 		_logfile => "$TestLib::log_path/${testname}_${name}.log" };
 
 	bless $self, $class;
+	rmtree($self->{_basedir});
 	mkdir $self->{_basedir}
 	  or
 	  BAIL_OUT("could not create data directory \"$self->{_basedir}\": $!");
