@@ -183,7 +183,9 @@ sub tap_check
 	my @flags;
 	foreach my $arg (0 .. scalar(@_))
 	{
+		#print "searching for prove_flags in \n" . $_[$arg];
 		next unless $_[$arg] =~ /^PROVE_FLAGS=(.*)/;
+		#print "found prove flags $1";
 		@flags = split(/\s+/, $1);
 		splice(@_, $arg, 1);
 		last;
@@ -191,8 +193,12 @@ sub tap_check
 
 	my $dir = shift;
 	chdir $dir;
+	print "Running tests for $dir\n";
 
-	my @args = ("prove", @flags, "t/*.pl");
+	#my $flags_str = join('|', @flags);
+	#print "running prove with flags $flags_str\n";
+
+	my @args = ("perl", "-MCarp::Always", "c:/perl64/bin/prove", @flags, "t/*.pl");
 
 	# adjust the environment for just this test
 	local %ENV = %ENV;
@@ -220,7 +226,12 @@ sub bincheck
 	foreach my $dir (@bin_dirs)
 	{
 		next unless -d "$dir/t";
-		my $status = tap_check($dir);
+		my @args;
+		push(@args, $dir);
+		push(@args, @_);
+		#my $args_str = join('|', @args);
+		#print "from bincheck, passing to tap_check $args_str\n";
+		my $status = tap_check(@args);
 		$mstat ||= $status;
 	}
 	exit $mstat if $mstat;
