@@ -470,7 +470,7 @@ EOF
 			chdir('src/backend/catalog');
 			my $bki_srcs = join(' ../../../src/include/catalog/', @allbki);
 			system(
-"perl genbki.pl -I../../../src/include/catalog --set-version=$self->{majorver} $bki_srcs"
+"perl -I . genbki.pl -I../../../src/include/catalog --set-version=$self->{majorver} $bki_srcs"
 			);
 			chdir('../../..');
 			copyFile(
